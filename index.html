@@ -5,286 +5,456 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>청년 기술창업 번역 플랫폼</title>
 <meta name="description" content="대덕특구 사업화 공개기술 1,451건을 대학생 눈높이로 번역해 창업 아이디어로 연결하는 서비스">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <style>
-  :root {
-    --bg: #f7f8fa;
-    --surface: #ffffff;
-    --border: #e3e6ea;
-    --text: #1a1d21;
-    --muted: #5c6470;
-    --faint: #8b939f;
-    --accent: #1b5e9c;
-    --accent-soft: #eaf2fa;
-    --ready-bg: #e6f4ea; --ready-fg: #1a6b38;
-    --collab-bg: #fff4e0; --collab-fg: #8a5a10;
-    --early-bg: #eef0f3; --early-fg: #4a525e;
-    --unknown-bg: #f2f2f3; --unknown-fg: #77787c;
-    --warn-bg: #fdf0ef; --warn-fg: #97341f; --warn-border: #f2cfc9;
-    --radius: 10px;
+:root {
+  --paper: #f4f6f8;
+  --surface: #ffffff;
+  --sunk: #eceff3;
+  --line: #dde2e8;
+  --line-strong: #c3cad3;
+  --ink: #15181e;
+  --ink-2: #4b525d;
+  --ink-3: #79818d;
+  --accent: #2b4c7e;
+  --accent-soft: #e7eef7;
+  --ready: #14614a;   --ready-bg: #dfefe8;
+  --collab: #82530f;  --collab-bg: #f7ecd9;
+  --early: #4b525d;   --early-bg: #e6eaef;
+  --unknown: #79818d; --unknown-bg: #edeff2;
+  --warn: #8d2f1e;    --warn-bg: #fbe9e6; --warn-line: #eec9c1;
+  --sans: "IBM Plex Sans KR", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11141a; --surface: #181c23; --sunk: #1e232b;
+    --line: #292f39; --line-strong: #39414d;
+    --ink: #e7eaef; --ink-2: #a5aeba; --ink-3: #79818d;
+    --accent: #82abdd; --accent-soft: #1c2634;
+    --ready: #6ac09b;   --ready-bg: #15302a;
+    --collab: #d5a25e;  --collab-bg: #31281a;
+    --early: #a5aeba;   --early-bg: #232831;
+    --unknown: #79818d; --unknown-bg: #1d212a;
+    --warn: #e4998a;    --warn-bg: #2c1b18; --warn-line: #48291f;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Pretendard", "Malgun Gothic", "맑은 고딕", -apple-system,
-                 BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
-    font-size: 15px;
-    line-height: 1.65;
-    word-break: keep-all;
-  }
-  a { color: var(--accent); }
-  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+}
+:root[data-theme="dark"] {
+  --paper: #11141a; --surface: #181c23; --sunk: #1e232b;
+  --line: #292f39; --line-strong: #39414d;
+  --ink: #e7eaef; --ink-2: #a5aeba; --ink-3: #79818d;
+  --accent: #82abdd; --accent-soft: #1c2634;
+  --ready: #6ac09b;   --ready-bg: #15302a;
+  --collab: #d5a25e;  --collab-bg: #31281a;
+  --early: #a5aeba;   --early-bg: #232831;
+  --unknown: #79818d; --unknown-bg: #1d212a;
+  --warn: #e4998a;    --warn-bg: #2c1b18; --warn-line: #48291f;
+}
 
-  /* ---------- header ---------- */
-  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 32px 0 26px; }
-  h1 { margin: 0 0 6px; font-size: 25px; letter-spacing: -0.3px; }
-  .tagline { margin: 0; color: var(--muted); font-size: 15px; }
-  .source-note {
-    margin-top: 14px; font-size: 13px; color: var(--faint);
-    display: flex; flex-wrap: wrap; gap: 6px 14px;
-  }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 15px; line-height: 1.7;
+  font-weight: 400; word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 22px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
-  /* ---------- search ---------- */
-  .search-zone { padding: 26px 0 4px; }
-  .search-box {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: var(--radius); padding: 4px 6px 4px 16px;
-    transition: border-color .15s;
-  }
-  .search-box:focus-within { border-color: var(--accent); }
-  .search-box svg { flex: none; color: var(--faint); }
-  #q {
-    flex: 1; border: 0; outline: 0; background: transparent;
-    font: inherit; font-size: 16px; padding: 12px 0; color: var(--text);
-  }
-  #clear {
-    border: 0; background: transparent; cursor: pointer; color: var(--faint);
-    font-size: 20px; line-height: 1; padding: 8px 12px; border-radius: 6px;
-  }
-  #clear:hover { background: var(--bg); color: var(--text); }
-  #clear[hidden] { display: none; }
+/* ── 머리말 ───────────────────────────────── */
+header { border-bottom: 1px solid var(--line); background: var(--surface); }
+.head-inner { padding: 34px 0 26px; }
+.eyebrow {
+  font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3);
+  margin: 0 0 12px;
+}
+h1 {
+  margin: 0 0 10px; font-size: 27px; font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.35; text-wrap: balance;
+}
+.tagline { margin: 0; color: var(--ink-2); font-size: 15.5px; max-width: 60ch; }
+.tagline b { color: var(--ink); font-weight: 600; }
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0 32px; margin: 22px 0 0;
+  padding-top: 20px; border-top: 1px solid var(--line);
+}
+.fact { display: flex; flex-direction: column; gap: 1px; }
+.fact dt { font-size: 12px; color: var(--ink-3); order: 2; }
+.fact dd {
+  margin: 0; order: 1; font-family: var(--mono); font-size: 19px;
+  font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+}
 
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
-  .chips-label { font-size: 13px; color: var(--faint); margin-right: 2px; }
-  .chip {
-    border: 1px solid var(--border); background: var(--surface); color: var(--muted);
-    border-radius: 999px; padding: 5px 13px; font-size: 13.5px; cursor: pointer;
-    font-family: inherit; transition: all .13s;
-  }
-  .chip:hover { border-color: var(--accent); color: var(--accent); }
+/* ── 검색 ─────────────────────────────────── */
+.search-zone { padding: 28px 0 0; }
+.search-box {
+  display: flex; align-items: center; gap: 12px; background: var(--surface);
+  border: 1px solid var(--line-strong); border-radius: 3px; padding: 0 6px 0 16px;
+}
+.search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.search-box > svg { flex: none; color: var(--ink-3); }
+#q {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font: inherit; font-size: 16.5px; padding: 15px 0; color: var(--ink);
+}
+#q::placeholder { color: var(--ink-3); }
+#q::-webkit-search-cancel-button { display: none; }
+#clear {
+  flex: none; border: 0; background: transparent; cursor: pointer; color: var(--ink-3);
+  font-size: 21px; line-height: 1; padding: 9px 12px; border-radius: 3px; font-family: var(--sans);
+}
+#clear:hover { background: var(--sunk); color: var(--ink); }
+#clear[hidden] { display: none; }
 
-  /* ---------- filters ---------- */
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; }
-  .filter {
-    border: 1px solid var(--border); background: var(--surface);
-    border-radius: 8px; padding: 8px 14px; font-size: 13.5px; cursor: pointer;
-    font-family: inherit; color: var(--muted); display: flex; align-items: center; gap: 7px;
-    transition: all .13s;
-  }
-  .filter:hover { border-color: var(--accent); }
-  .filter[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-  .filter .n { font-size: 12px; color: var(--faint); font-weight: 400; }
-  .filter[aria-pressed="true"] .n { color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; align-items: baseline; }
+.chips-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-3); margin-right: 3px;
+}
+.chip {
+  border: 1px solid var(--line); background: transparent; color: var(--ink-2);
+  border-radius: 3px; padding: 4px 11px; font-family: var(--sans); font-size: 13.5px;
+  cursor: pointer; transition: border-color .12s, color .12s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
 
-  .result-line { margin: 22px 0 12px; font-size: 13.5px; color: var(--muted); }
-  .result-line b { color: var(--text); }
+/* ── 분포 막대 + 필터 ──────────────────────── */
+.dist { margin-top: 30px; }
+.dist-label {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px; margin-bottom: 9px;
+}
+.dist-label h2 {
+  margin: 0; font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.dist-label p { margin: 0; font-size: 12.5px; color: var(--ink-3); }
+.dist-bar {
+  display: flex; height: 9px; border-radius: 2px; overflow: hidden;
+  background: var(--sunk); gap: 1.5px;
+}
+.dist-bar span { display: block; transition: opacity .15s; }
+.dist-bar span[data-dim="true"] { opacity: .28; }
+.seg-ready { background: var(--ready); }
+.seg-collab { background: var(--collab); }
+.seg-early { background: var(--early); }
+.seg-unknown { background: var(--unknown); }
 
-  /* ---------- cards ---------- */
-  .cards { display: grid; gap: 12px; padding-bottom: 8px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 18px 20px; cursor: pointer; text-align: left; font: inherit; color: inherit;
-    display: block; width: 100%; transition: border-color .13s, box-shadow .13s;
-  }
-  .card:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgba(27,94,156,.07); }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
-  .card-name { font-size: 16px; font-weight: 600; letter-spacing: -0.2px; margin: 0; }
-  .card-summary { margin: 9px 0 0; color: var(--muted); font-size: 14px; }
-  .card-meta { margin-top: 11px; font-size: 12.5px; color: var(--faint); display: flex; gap: 12px; flex-wrap: wrap; }
+.filters { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+.filter {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+  border-radius: 3px; padding: 7px 12px; font-family: var(--sans); font-size: 13.5px;
+  transition: border-color .12s, color .12s;
+}
+.filter:hover { border-color: var(--line-strong); }
+.filter[aria-pressed="true"] { border-color: var(--accent); color: var(--ink); font-weight: 600; }
+.filter .dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+.filter .n {
+  font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  font-weight: 400; font-variant-numeric: tabular-nums;
+}
 
-  .badge {
-    flex: none; border-radius: 6px; padding: 4px 10px; font-size: 12.5px;
-    font-weight: 600; white-space: nowrap;
-  }
-  .badge.ready   { background: var(--ready-bg);   color: var(--ready-fg); }
-  .badge.collab  { background: var(--collab-bg);  color: var(--collab-fg); }
-  .badge.early   { background: var(--early-bg);   color: var(--early-fg); }
-  .badge.unknown { background: var(--unknown-bg); color: var(--unknown-fg); }
+/* ── 결과 목록 ────────────────────────────── */
+.result-line {
+  margin: 32px 0 0; padding-bottom: 10px; border-bottom: 1px solid var(--line-strong);
+  font-size: 13px; color: var(--ink-3); display: flex; justify-content: space-between;
+  align-items: baseline; gap: 14px;
+}
+.result-line b { color: var(--ink); font-weight: 600; font-family: var(--mono); }
+.rows { display: flex; flex-direction: column; }
+.row {
+  display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; align-items: start;
+  width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  padding: 17px 14px 17px 2px; transition: background .12s;
+}
+.row:hover { background: var(--surface); }
+.row-name {
+  margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+  line-height: 1.5; grid-column: 1;
+}
+.row-summary {
+  margin: 5px 0 0; grid-column: 1; color: var(--ink-2); font-size: 14px;
+  font-weight: 300; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.row-meta {
+  grid-column: 1; margin-top: 9px; display: flex; flex-wrap: wrap; gap: 4px 14px;
+  font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.row-stage { grid-column: 2; grid-row: 1 / span 2; justify-self: end; }
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr; }
+  .row-stage { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 9px; }
+}
+.stage {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 3px;
+}
+.stage .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.stage.ready { background: var(--ready-bg); color: var(--ready); }
+.stage.collab { background: var(--collab-bg); color: var(--collab); }
+.stage.early { background: var(--early-bg); color: var(--early); }
+.stage.unknown { background: var(--unknown-bg); color: var(--unknown); }
+.stage.ready .dot { background: var(--ready); }
+.stage.collab .dot { background: var(--collab); }
+.stage.early .dot { background: var(--early); }
+.stage.unknown .dot { background: var(--unknown); }
 
-  .flag {
-    margin-top: 11px; background: var(--warn-bg); color: var(--warn-fg);
-    border: 1px solid var(--warn-border); border-radius: 7px;
-    padding: 9px 12px; font-size: 12.5px; line-height: 1.55;
-  }
+.flag {
+  grid-column: 1 / -1; margin-top: 11px; background: var(--warn-bg); color: var(--warn);
+  border: 1px solid var(--warn-line); border-radius: 3px; padding: 9px 12px;
+  font-size: 12.5px; line-height: 1.6;
+}
+.empty { padding: 60px 4px; color: var(--ink-2); }
+.empty strong { display: block; font-size: 17px; color: var(--ink); margin-bottom: 7px; font-weight: 600; }
+#more {
+  margin: 20px 0 0; padding: 13px; width: 100%; cursor: pointer;
+  border: 1px solid var(--line); background: transparent; border-radius: 3px;
+  font-family: var(--sans); font-size: 14px; color: var(--accent);
+}
+#more:hover { border-color: var(--accent); background: var(--surface); }
+#more[hidden] { display: none; }
 
-  .empty { text-align: center; padding: 56px 20px; color: var(--muted); }
-  .empty strong { display: block; font-size: 16px; color: var(--text); margin-bottom: 6px; }
-  #more {
-    display: block; width: 100%; margin: 14px 0 0; padding: 13px;
-    border: 1px solid var(--border); background: var(--surface); border-radius: var(--radius);
-    font: inherit; font-size: 14px; color: var(--accent); cursor: pointer;
-  }
-  #more:hover { border-color: var(--accent); }
-  #more[hidden] { display: none; }
+/* ── 상세 ─────────────────────────────────── */
+dialog {
+  border: 1px solid var(--line-strong); border-radius: 4px; padding: 0;
+  max-width: 700px; width: calc(100% - 28px); background: var(--surface); color: var(--ink);
+  box-shadow: 0 18px 50px rgba(10, 14, 22, .28);
+}
+dialog::backdrop { background: rgba(12, 16, 22, .5); }
+.d-head {
+  padding: 24px 26px 20px; border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; gap: 18px; align-items: flex-start;
+}
+.d-head h2 { margin: 0 0 12px; font-size: 19.5px; font-weight: 600; line-height: 1.5; letter-spacing: -0.01em; }
+.d-meta {
+  display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--mono);
+  font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums;
+}
+.d-meta b { color: var(--ink-2); font-weight: 500; }
+.d-close {
+  flex: none; border: 1px solid var(--line); background: transparent; border-radius: 3px;
+  cursor: pointer; width: 32px; height: 32px; font-size: 18px; color: var(--ink-3);
+  line-height: 1; font-family: var(--sans);
+}
+.d-close:hover { background: var(--sunk); color: var(--ink); }
+.d-body { padding: 0 26px 28px; max-height: min(70vh, 700px); overflow-y: auto; }
+.field { margin-top: 24px; }
+.field h3 {
+  margin: 0 0 8px; font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.field p { margin: 0; font-size: 14.5px; }
+.quoted {
+  background: var(--sunk); border-left: 2px solid var(--line-strong);
+  padding: 13px 16px; font-size: 14.5px; margin: 0; font-weight: 300;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ---------- detail dialog ---------- */
-  dialog {
-    border: 0; border-radius: 14px; padding: 0; max-width: 720px; width: calc(100% - 32px);
-    background: var(--surface); color: var(--text); box-shadow: 0 12px 44px rgba(0,0,0,.19);
-  }
-  dialog::backdrop { background: rgba(20,24,30,.45); }
-  .d-head {
-    padding: 24px 26px 18px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
-    position: sticky; top: 0; background: var(--surface); border-radius: 14px 14px 0 0;
-  }
-  .d-head h2 { margin: 0 0 9px; font-size: 19px; letter-spacing: -0.3px; line-height: 1.45; }
-  .d-close {
-    flex: none; border: 0; background: var(--bg); border-radius: 8px; cursor: pointer;
-    width: 32px; height: 32px; font-size: 19px; color: var(--muted); line-height: 1;
-  }
-  .d-close:hover { background: var(--border); color: var(--text); }
-  .d-body { padding: 4px 26px 26px; max-height: min(72vh, 720px); overflow-y: auto; }
-  .field { margin-top: 22px; }
-  .field h3 {
-    margin: 0 0 7px; font-size: 12px; font-weight: 700; color: var(--faint);
-    letter-spacing: .06em; text-transform: uppercase;
-  }
-  .field p { margin: 0; font-size: 14.5px; }
-  .field .quoted {
-    background: var(--bg); border-left: 3px solid var(--border);
-    padding: 12px 15px; border-radius: 0 7px 7px 0; margin: 0;
-  }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  @media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } }
-  .kv { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-  .kv span b { color: var(--text); font-weight: 600; }
+/* TRL 사다리 — 실제로 순서가 있는 척도라 단계로 표시한다 */
+.ladder { display: flex; gap: 3px; margin: 0 0 10px; }
+.rung { flex: 1; text-align: center; }
+.rung i {
+  display: block; height: 5px; border-radius: 1px; background: var(--line); margin-bottom: 6px;
+}
+.rung span {
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.rung[data-on="true"] i { background: currentColor; }
+.rung[data-on="true"] span { color: var(--ink); font-weight: 600; }
+.ladder.ready { color: var(--ready); }
+.ladder.collab { color: var(--collab); }
+.ladder.early { color: var(--early); }
+.ladder.unknown { color: var(--unknown); }
+.ladder-zones {
+  display: flex; justify-content: space-between; font-family: var(--mono);
+  font-size: 10.5px; color: var(--ink-3); letter-spacing: .03em;
+}
 
-  .panel {
-    margin-top: 24px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 16px 18px;
-  }
-  .panel h3 { margin: 0 0 4px; font-size: 14px; }
-  .panel .caveat { margin: 0 0 12px; font-size: 12.5px; color: var(--faint); line-height: 1.55; }
-  .partner-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-  .partner-list li {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
-    padding: 5px 10px; font-size: 12.5px;
-  }
-  .partner-list li em { font-style: normal; color: var(--faint); font-size: 11.5px; margin-left: 5px; }
-  .trend { display: flex; gap: 14px; flex-wrap: wrap; margin: 0; }
-  .trend div { font-size: 13px; }
-  .trend b { display: block; font-size: 18px; color: var(--accent); font-weight: 700; }
+.panel { margin-top: 26px; border: 1px solid var(--line); border-radius: 3px; padding: 17px 18px; }
+.panel h3 { margin: 0 0 5px; font-size: 14.5px; font-weight: 600; }
+.panel .caveat { margin: 0 0 14px; font-size: 12.5px; color: var(--ink-3); line-height: 1.65; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.tag-list li {
+  border: 1px solid var(--line); border-radius: 3px; padding: 4px 9px; font-size: 12.5px;
+  color: var(--ink-2); display: flex; gap: 7px; align-items: baseline;
+}
+.tag-list li em {
+  font-style: normal; color: var(--ink-3); font-family: var(--mono);
+  font-size: 11px; font-variant-numeric: tabular-nums;
+}
+.trend { display: flex; flex-wrap: wrap; gap: 22px; margin: 0; }
+.trend div { display: flex; flex-direction: column; }
+.trend dt { order: 2; font-size: 12px; color: var(--ink-3); }
+.trend dd {
+  order: 1; margin: 0; font-family: var(--mono); font-size: 18px; font-weight: 600;
+  letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+}
+details > summary { cursor: pointer; font-size: 13px; color: var(--accent); margin-top: 13px; }
+.src-note { margin-top: 24px; font-size: 12px; color: var(--ink-3); line-height: 1.65; }
 
-  /* ---------- footer ---------- */
-  footer {
-    margin-top: 46px; border-top: 1px solid var(--border); background: var(--surface);
-    padding: 28px 0 40px; font-size: 13px; color: var(--muted);
-  }
-  footer h3 { margin: 0 0 10px; font-size: 13.5px; color: var(--text); }
-  footer ul { margin: 0 0 20px; padding-left: 18px; }
-  footer li { margin-bottom: 5px; }
-  .team { color: var(--faint); font-size: 12.5px; border-top: 1px solid var(--border); padding-top: 16px; }
-  #loading { text-align: center; padding: 60px 20px; color: var(--muted); }
+/* ── 꼬리말 ───────────────────────────────── */
+footer { margin-top: 54px; border-top: 1px solid var(--line); background: var(--surface); }
+.foot-inner { padding: 32px 0 44px; font-size: 13.5px; color: var(--ink-2); }
+footer h3 {
+  margin: 0 0 12px; font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.src-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 13.5px; }
+.src-table th, .src-table td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.src-table th { font-weight: 500; color: var(--ink-3); font-size: 11.5px; font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.src-table td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+.limits { margin: 0 0 30px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.limits li { padding-left: 17px; position: relative; line-height: 1.65; }
+.limits li::before { content: "—"; position: absolute; left: 0; color: var(--ink-3); }
+.limits b { font-weight: 600; color: var(--ink); }
+.team { border-top: 1px solid var(--line); padding-top: 18px; font-size: 12.5px; color: var(--ink-3); line-height: 1.75; }
+#loading { padding: 70px 0; color: var(--ink-3); font-family: var(--mono); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap">
+  <div class="wrap head-inner">
+    <p class="eyebrow">연구개발특구진흥재단 공공데이터</p>
     <h1>청년 기술창업 번역 플랫폼</h1>
-    <p class="tagline">대덕특구에 잠들어 있는 <b>사업화 공개기술 1,451건</b>을, 창업을 고민하는 학생이 읽을 수 있게 번역합니다.</p>
-    <div class="source-note">
-      <span>연구개발특구진흥재단 공공데이터 4종 활용</span>
-      <span>·</span>
-      <span>기술 설명은 원문 그대로 인용 (재작성·생성 없음)</span>
-    </div>
+    <p class="tagline">대덕특구에 잠들어 있는 <b>사업화 공개기술 1,451건</b>을, 창업을 고민하는 학생이 읽을 수 있게 번역합니다. 기술 설명은 <b>원문 그대로</b> 옮기고, 전문가용 지표인 기술성숙도만 단계로 풀어 씁니다.</p>
+    <dl class="facts">
+      <div class="fact"><dd>1,451</dd><dt>공개기술 (2022~2024)</dt></div>
+      <div class="fact"><dd>111</dd><dt>대덕 소재 기관</dt></div>
+      <div class="fact"><dd>2,057</dd><dt>대덕 누적 기술이전</dt></div>
+      <div class="fact"><dd>1,397<span style="font-size:13px;font-weight:500">억원</span></dd><dt>누적 기술이전료 · 특구 1위</dt></div>
+    </dl>
   </div>
 </header>
 
 <main class="wrap">
-  <div id="loading">데이터를 불러오는 중입니다…</div>
+  <p id="loading">데이터를 불러오는 중입니다…</p>
 
   <div id="app" hidden>
     <div class="search-zone">
       <div class="search-box">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path>
         </svg>
-        <input id="q" type="search" placeholder="관심 분야나 문제의식을 입력하세요 — 예: 반려동물, 친환경 포장, 제조 자동화"
-               autocomplete="off" spellcheck="false">
+        <input id="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="관심 분야나 문제의식을 입력하세요" aria-label="공개기술 검색">
         <button id="clear" hidden aria-label="검색어 지우기">&times;</button>
       </div>
-      <div class="chips">
+      <div class="chips" id="chips">
         <span class="chips-label">예시</span>
         <button class="chip">반려동물</button>
         <button class="chip">친환경</button>
-        <button class="chip">제조 자동화</button>
-        <button class="chip">2차전지</button>
+        <button class="chip">전기차 충전</button>
         <button class="chip">헬스케어</button>
         <button class="chip">농업</button>
+        <button class="chip">2차전지</button>
       </div>
-      <div class="filters" id="filters"></div>
+
+      <section class="dist">
+        <div class="dist-label">
+          <h2>기술성숙도 분포</h2>
+          <p>공개기술의 86%가 실험실~시작품 단계입니다. 이 비율을 그대로 보여드립니다.</p>
+        </div>
+        <div class="dist-bar" id="distBar" aria-hidden="true"></div>
+        <div class="filters" id="filters"></div>
+      </section>
     </div>
 
     <p class="result-line" id="resultLine"></p>
-    <div class="cards" id="cards"></div>
+    <div class="rows" id="rows"></div>
     <button id="more" hidden></button>
   </div>
 </main>
 
 <footer>
-  <div class="wrap">
-    <h3>활용한 공공데이터 (연구개발특구진흥재단)</h3>
-    <ul>
-      <li><a href="https://www.data.go.kr/data/15149802/fileData.do" target="_blank" rel="noopener">사업화 공개 기술 세부 현황</a> — 1,451건. 기술 카드의 본문·기술성숙도·시장 전망</li>
-      <li><a href="https://www.data.go.kr/data/15142582/fileData.do" target="_blank" rel="noopener">특구 입주기관 통계조사 대상기관</a> — 14,989건 중 대덕 비기업 조직 111개를 실행 파트너 안내로 사용</li>
-      <li><a href="https://www.data.go.kr/data/15089826/fileData.do" target="_blank" rel="noopener">연구소기업 운영현황</a> — 대덕 280건의 연도별 추세</li>
-      <li><a href="https://www.data.go.kr/data/15118213/fileData.do" target="_blank" rel="noopener">연구개발특구 연구성과</a> — 대덕 기술이전 실적</li>
-    </ul>
+  <div class="wrap foot-inner">
+    <h3>활용한 공공데이터</h3>
+    <table class="src-table">
+      <thead><tr><th>연구개발특구진흥재단 데이터</th><th>규모</th><th>쓰이는 곳</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.data.go.kr/data/15149802/fileData.do" target="_blank" rel="noopener">사업화 공개 기술 세부 현황</a></td>
+          <td class="num">1,451행</td><td>기술 본문 · 성숙도 · 시장 전망</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.data.go.kr/data/15142582/fileData.do" target="_blank" rel="noopener">특구 입주기관 통계조사 대상기관</a></td>
+          <td class="num">14,989행</td><td>대덕 비기업 조직 111곳 → 문의처 안내</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.data.go.kr/data/15089826/fileData.do" target="_blank" rel="noopener">연구소기업 운영현황</a></td>
+          <td class="num">1,348행</td><td>대덕 280건의 연도별 사업화 추세</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.data.go.kr/data/15118213/fileData.do" target="_blank" rel="noopener">연구개발특구 연구성과</a></td>
+          <td class="num">6행</td><td>대덕 누적 기술이전 실적</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3>이 서비스가 하지 않는 것</h3>
-    <ul>
-      <li>기술 설명을 요약하거나 다시 쓰지 않습니다. 화면의 기술 개요·전망은 <b>원본 데이터의 문장 그대로</b>입니다.</li>
-      <li>기술성숙도(TRL) 배지만 규칙에 따라 번역합니다. 공개기술의 88.6%가 실험실~시작품 단계(TRL 3~5)이며, 이를 낙관적으로 포장하지 않고 그대로 표시합니다.</li>
-      <li>실행 파트너 기관은 <b>개별 기술과 매칭한 결과가 아닙니다.</b> 원본 데이터에 기관과 기술을 잇는 키가 없어, 대덕 소재 기관 목록을 문의처 안내로만 제공합니다.</li>
-      <li>연구소기업 수치는 <b>지역 전체의 추세</b>이며 특정 기술의 성공 사례가 아닙니다.</li>
+    <ul class="limits">
+      <li><b>기술 설명을 다시 쓰지 않습니다.</b> 화면의 기술 개요와 시장 전망은 원본 데이터의 문장 그대로입니다. 생성형 요약은 기술 역량을 부풀릴 수 있어 쓰지 않았습니다.</li>
+      <li><b>문의처 기관은 개별 기술과 매칭한 결과가 아닙니다.</b> 원본 데이터에 기관과 기술을 잇는 항목이 없어, 대덕 소재 기관 목록을 참고용으로만 제공합니다.</li>
+      <li><b>연구소기업 수치는 지역 전체의 추세입니다.</b> 특정 기술에서 그 회사가 나왔다는 뜻이 아닙니다.</li>
+      <li><b>원본 데이터의 입력 오류를 임의로 고치지 않습니다.</b> 기술명과 개요의 주제가 어긋난 항목 1건은 경고와 함께 원문 그대로 표시합니다.</li>
+      <li><b>다루는 범위는 2022~2024년 공개분입니다.</b> 대덕특구의 모든 기술이 아니라 특구재단이 공개한 사업화 기술 전수입니다.</li>
     </ul>
 
-    <p class="team">2026년도 공공데이터 활용 공모전 · 웹/앱 개발 분야 · 연구개발특구진흥재단<br>
-    팀 <b>일했음청년</b> — 국립한밭대학교 컴퓨터공학과 박준성 · 김주희 · 노도원</p>
+    <p class="team">
+      2026년도 공공데이터 활용 공모전 · 웹/앱 개발 분야 · 연구개발특구진흥재단<br>
+      팀 <b>일했음청년</b> — 국립한밭대학교 컴퓨터공학과 박준성 · 김주희 · 노도원
+    </p>
   </div>
 </footer>
 
-<dialog id="detail">
+<dialog id="detail" aria-labelledby="dName">
   <div class="d-head">
     <div>
       <h2 id="dName"></h2>
-      <div class="kv" id="dMeta"></div>
+      <div class="d-meta" id="dMeta"></div>
     </div>
     <button class="d-close" id="dClose" aria-label="닫기">&times;</button>
   </div>
   <div class="d-body" id="dBody"></div>
 </dialog>
 
+<script id="inline-data" type="application/json">null</script>
 <script>
 const STAGES = {
-  ready:   { label: "지금 시작 가능",        hint: "TRL 7~9 · 실증/사업화 단계" },
-  collab:  { label: "공동연구 검토",          hint: "TRL 6 · 시작품 검증 단계" },
-  early:   { label: "아직 이르다 · 장기 관찰", hint: "TRL 2~5 · 개념~실험실 단계" },
-  unknown: { label: "성숙도 미공개",          hint: "원본 데이터에 TRL 값 없음" },
+  ready:   { label: "지금 시작 가능",        hint: "TRL 7~9 · 실증에서 사업화로 넘어가는 단계",
+             note: "실증을 마쳤거나 사업화에 가까운 소수의 기술입니다. 전체 1,451건 중 35건뿐입니다." },
+  collab:  { label: "공동연구 검토",          hint: "TRL 6 · 시작품 수준까지 검증된 단계",
+             note: "연구 기관과 함께 이어가기 좋은 단계입니다. 전체 중 102건입니다." },
+  early:   { label: "아직 이르다 · 장기 관찰", hint: "TRL 2~5 · 개념에서 실험실 검증까지",
+             note: "바로 창업으로 잇기보다 연구 기관과 함께 다듬어야 하는 단계입니다. 공개기술의 대부분인 1,250건이 여기에 속합니다." },
+  unknown: { label: "성숙도 미공개",          hint: "원본 데이터에 TRL 값 없음",
+             note: "원본 데이터에 기술성숙도 값이 없어 단계를 판단할 수 없습니다." },
 };
+const STAGE_ORDER = ["ready", "collab", "early", "unknown"];
 const PAGE = 20;
 
 let DB = null, results = [], shown = 0, stageFilter = null;
 
 const $ = (s) => document.querySelector(s);
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const num = (n) => n.toLocaleString("ko-KR");
 
-/* ---------- 검색: 한국어 짧은 질의에 맞춘 부분일치 + 글자 바이그램 보조 ---------- */
-function norm(s) { return s.toLowerCase().replace(/[^0-9a-z가-힣]+/g, " ").trim(); }
+/* ── 검색 ──────────────────────────────────────────────
+   정적 사이트로 배포하려고 형태소 분석기나 임베딩 모델 없이
+   부분일치 + 글자 바이그램으로 맞춘다. */
+const norm = (s) => s.toLowerCase().replace(/[^0-9a-z가-힣]+/g, " ").trim();
 
 function bigrams(s) {
   const t = s.replace(/\s+/g, ""), out = new Set();
@@ -313,8 +483,8 @@ function score(t, terms, phrase, qbg) {
     if (ts > 0) matched++;
     s += ts;
   }
-  // "제조 자동화"처럼 여러 단어를 넣었을 때, 흔한 단어 하나만 걸린 기술이
-  // 두 단어를 모두 담은 기술보다 위로 오지 않도록 커버리지를 반영한다.
+  // "전기차 충전"처럼 여러 단어를 넣었을 때, 흔한 단어 하나만 걸린 기술이
+  // 두 단어를 모두 담은 기술보다 위로 올라오지 않도록 커버리지를 반영한다.
   if (terms.length > 1) {
     s *= matched / terms.length;
     if (matched < terms.length) s *= 0.5;
@@ -324,7 +494,7 @@ function score(t, terms, phrase, qbg) {
     else if (t._sum.includes(phrase)) s += 15;
     else if (t._body.includes(phrase)) s += 8;
   }
-  if (s === 0 && qbg.size) {           // 직접 일치가 없을 때만 부분 유사도로 보조
+  if (s === 0 && qbg.size) {            // 직접 일치가 없을 때만 부분 유사도로 보조
     let hit = 0;
     for (const g of qbg) if (t._bg.has(g)) hit++;
     if (hit >= 2) s = (hit / qbg.size) * 4;
@@ -336,9 +506,8 @@ function search(query) {
   const pool = stageFilter ? DB.tech.filter((t) => t.stage === stageFilter) : DB.tech;
   const q = norm(query);
   if (!q) {
-    // 검색어가 없으면 사업화에 가까운 단계부터 보여준다.
-    const order = { ready: 0, collab: 1, early: 2, unknown: 3 };
-    return [...pool].sort((a, b) => order[a.stage] - order[b.stage] || (b.trl || 0) - (a.trl || 0));
+    const rank = Object.fromEntries(STAGE_ORDER.map((k, i) => [k, i]));
+    return [...pool].sort((a, b) => rank[a.stage] - rank[b.stage] || (b.trl || 0) - (a.trl || 0));
   }
   const terms = [...new Set(q.split(" "))].filter((x) => x.length >= 2);
   if (!terms.length) return [];
@@ -351,86 +520,97 @@ function search(query) {
     .map((x) => x.t);
 }
 
-/* ---------- 렌더 ---------- */
-function badge(stage) {
-  return `<span class="badge ${stage}" title="${esc(STAGES[stage].hint)}">${esc(STAGES[stage].label)}</span>`;
+/* ── 렌더 ───────────────────────────────────────────── */
+const stagePill = (k) =>
+  `<span class="stage ${k}" title="${esc(STAGES[k].hint)}"><i class="dot"></i>${esc(STAGES[k].label)}</span>`;
+
+function renderDist() {
+  const c = DB.stats.stageCounts, total = DB.stats.techTotal;
+  $("#distBar").innerHTML = STAGE_ORDER.map((k) =>
+    `<span class="seg-${k}" style="flex:${c[k] || 0}"
+       data-dim="${stageFilter && stageFilter !== k}"></span>`).join("");
+
+  $("#filters").innerHTML = [
+    `<button class="filter" data-stage="" aria-pressed="${!stageFilter}">전체 <span class="n">${num(total)}</span></button>`,
+    ...STAGE_ORDER.map((k) =>
+      `<button class="filter" data-stage="${k}" aria-pressed="${stageFilter === k}">
+         <i class="dot seg-${k}"></i>${esc(STAGES[k].label)} <span class="n">${num(c[k] || 0)}</span>
+       </button>`),
+  ].join("");
 }
 
-function renderFilters() {
-  const c = DB.stats.stageCounts;
-  const items = [["", "전체", DB.stats.techTotal],
-    ...["ready", "collab", "early", "unknown"].map((k) => [k, STAGES[k].label, c[k] || 0])];
-  $("#filters").innerHTML = items.map(([k, label, n]) =>
-    `<button class="filter" data-stage="${k}" aria-pressed="${(stageFilter || "") === k}">
-       ${esc(label)} <span class="n">${n}</span></button>`).join("");
-}
-
-function renderCards(reset) {
-  const box = $("#cards");
+function renderRows(reset) {
+  const box = $("#rows");
   if (reset) { box.innerHTML = ""; shown = 0; }
   const slice = results.slice(shown, shown + PAGE);
   box.insertAdjacentHTML("beforeend", slice.map((t) => `
-    <button class="card" data-i="${t.i}">
-      <div class="card-top">
-        <h3 class="card-name">${esc(t.name)}</h3>
-        ${badge(t.stage)}
-      </div>
-      <p class="card-summary">${esc(t.summary)}</p>
-      <div class="card-meta">
+    <button class="row" data-i="${t.i}">
+      <h3 class="row-name">${esc(t.name)}</h3>
+      <p class="row-summary">${esc(t.summary)}</p>
+      <div class="row-meta">
         <span>${esc(t.year)}년 공개</span>
-        ${t.trl ? `<span>TRL ${t.trl}단계</span>` : ""}
+        <span>${t.trl ? "TRL " + t.trl : "TRL 미공개"}</span>
         <span>출원 ${esc(t.appNo)}</span>
       </div>
-      ${t.flagged ? `<p class="flag">원본 데이터에서 기술명과 기술 개요의 주제가 서로 다른 것으로 확인된 항목입니다. 원문을 그대로 표시하되, 해석에 주의가 필요합니다.</p>` : ""}
+      <div class="row-stage">${stagePill(t.stage)}</div>
+      ${t.flagged ? `<p class="flag">원본 데이터에서 기술명과 개요의 주제가 서로 어긋난 항목입니다. 고치지 않고 원문 그대로 표시합니다.</p>` : ""}
     </button>`).join(""));
   shown += slice.length;
 
   const more = $("#more");
   more.hidden = shown >= results.length;
-  more.textContent = `${results.length - shown}건 더 보기`;
-}
-
-function renderResultLine(query) {
-  const n = results.length;
-  const filterName = stageFilter ? STAGES[stageFilter].label : null;
-  let msg;
-  if (query) msg = `<b>${esc(query)}</b> 검색 결과 <b>${n}건</b>`;
-  else msg = `공개기술 <b>${n}건</b>`;
-  if (filterName) msg += ` · ${esc(filterName)} 단계만 표시`;
-  $("#resultLine").innerHTML = msg;
+  more.textContent = `${num(results.length - shown)}건 더 보기`;
 }
 
 function run(reset = true) {
   const query = $("#q").value.trim();
   results = search(query);
-  renderResultLine(query);
-  renderFilters();
+  renderDist();
+
+  const scope = stageFilter ? ` · ${STAGES[stageFilter].label}` : "";
+  $("#resultLine").innerHTML = query
+    ? `<span>“${esc(query)}” 검색 결과 <b>${num(results.length)}</b>건${esc(scope)}</span>
+       <span>관련도순</span>`
+    : `<span>공개기술 <b>${num(results.length)}</b>건${esc(scope)}</span>
+       <span>사업화에 가까운 단계부터</span>`;
+
   if (!results.length) {
-    $("#cards").innerHTML = `<div class="empty"><strong>일치하는 공개기술이 없습니다</strong>
+    $("#rows").innerHTML = `<div class="empty"><strong>일치하는 공개기술이 없습니다</strong>
       다른 표현으로 검색해 보세요. 이 서비스는 2022~2024년에 공개된 특구 기술 1,451건만 다룹니다.</div>`;
     $("#more").hidden = true;
     return;
   }
-  renderCards(reset);
+  renderRows(reset);
 }
 
-/* ---------- 상세 ---------- */
+/* ── 상세 ───────────────────────────────────────────── */
+function ladder(t) {
+  const rungs = [2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
+    `<div class="rung" data-on="${t.trl === n}"><i></i><span>${n}</span></div>`).join("");
+  return `
+    <div class="field">
+      <h3>기술성숙도 (TRL)</h3>
+      <div class="ladder ${t.stage}">${rungs}</div>
+      <div class="ladder-zones"><span>개념 · 실험실</span><span>시작품</span><span>실증 · 사업화</span></div>
+      <p style="margin-top:12px">${esc(STAGES[t.stage].label)} — ${esc(STAGES[t.stage].note)}</p>
+    </div>`;
+}
+
 function partnerPanel() {
   const byType = {};
   for (const p of DB.partners) (byType[p.type] ||= []).push(p.name);
-  const order = Object.entries(byType).sort((a, b) => b[1].length - a[1].length);
+  const types = Object.entries(byType).sort((a, b) => b[1].length - a[1].length);
   return `
     <div class="panel">
-      <h3>실행 파트너 — 대덕 소재 기관 ${DB.partners.length}곳</h3>
+      <h3>어디에 물어볼 수 있나 — 대덕 소재 기관 ${DB.partners.length}곳</h3>
       <p class="caveat">이 기술과 매칭한 결과가 아닙니다. 원본 데이터에 기관과 기술을 잇는 항목이 없어,
-        문의처를 찾을 때 참고할 수 있도록 대덕특구에 있는 비기업 조직 전체를 유형별로 보여드립니다.</p>
-      <ul class="partner-list">
-        ${order.map(([type, names]) =>
-          `<li>${esc(type)}<em>${names.length}곳</em></li>`).join("")}
+        문의처를 찾을 때 참고하도록 대덕특구의 비기업 조직 전체를 유형별로 보여드립니다.</p>
+      <ul class="tag-list">
+        ${types.map(([type, names]) => `<li>${esc(type)}<em>${names.length}</em></li>`).join("")}
       </ul>
-      <details style="margin-top:12px">
-        <summary style="cursor:pointer;font-size:13px;color:var(--accent)">기관 이름 전체 보기</summary>
-        <ul class="partner-list" style="margin-top:10px">
+      <details>
+        <summary>기관 이름 전체 보기</summary>
+        <ul class="tag-list" style="margin-top:12px">
           ${DB.partners.map((p) => `<li>${esc(p.name)}<em>${esc(p.type)}</em></li>`).join("")}
         </ul>
       </details>
@@ -443,30 +623,31 @@ function contextPanel() {
   return `
     <div class="panel">
       <h3>대덕특구는 어떤 곳인가</h3>
-      <p class="caveat">아래는 대덕특구 전체의 지표이며, 이 기술 하나의 성과가 아닙니다.</p>
-      <div class="trend">
-        <div><b>${c.transferCount.toLocaleString()}건</b>누적 기술이전</div>
-        <div><b>${Math.round(c.transferFeeMillion / 100).toLocaleString()}억원</b>누적 기술이전료 (특구 1위)</div>
-        <div><b>${c.labcoTotal}개</b>대덕 연구소기업 ${years.length ? `(${years.map(([y, n]) => `${y}년 ${n}개`).join(" · ")})` : ""}</div>
-      </div>
+      <p class="caveat">대덕특구 전체의 지표이며, 이 기술 하나의 성과가 아닙니다.</p>
+      <dl class="trend">
+        <div><dd>${num(c.transferCount)}건</dd><dt>누적 기술이전</dt></div>
+        <div><dd>${num(Math.round(c.transferFeeMillion / 100))}억원</dd><dt>누적 기술이전료 · 특구 1위</dt></div>
+        <div><dd>${num(c.labcoTotal)}개</dd><dt>대덕 연구소기업 (${years.map(([y, n]) => `${y}년 ${n}`).join(" · ")})</dt></div>
+      </dl>
     </div>`;
 }
 
 function openDetail(i) {
   const t = DB.tech.find((x) => x.i === i);
   if (!t) return;
+
   $("#dName").textContent = t.name;
   $("#dMeta").innerHTML = `
-    ${badge(t.stage)}
-    <span><b>${esc(t.year)}</b>년 공개</span>
-    ${t.trl ? `<span>기술성숙도 <b>TRL ${t.trl}</b>단계</span>` : ""}
+    <span>${esc(t.year)}년 공개</span>
+    <span>${t.trl ? "TRL <b>" + t.trl + "</b>단계" : "TRL 미공개"}</span>
     <span>출원번호 <b>${esc(t.appNo)}</b></span>`;
 
-  const field = (title, body) => body
-    ? `<div class="field"><h3>${title}</h3><p class="quoted">${esc(body)}</p></div>` : "";
+  const field = (title, body) =>
+    body ? `<div class="field"><h3>${title}</h3><p class="quoted">${esc(body)}</p></div>` : "";
 
   $("#dBody").innerHTML = `
-    ${t.flagged ? `<p class="flag" style="margin-top:18px">원본 데이터에서 기술명과 기술 개요의 주제가 서로 다른 것으로 확인된 항목입니다. 가공 없이 원문을 그대로 표시하고 있으며, 해석에 주의가 필요합니다.</p>` : ""}
+    ${t.flagged ? `<p class="flag" style="margin-top:20px">원본 데이터에서 기술명과 개요의 주제가 서로 어긋난 항목입니다. 임의로 고치지 않고 원문 그대로 표시하고 있으니 해석에 주의해 주세요.</p>` : ""}
+    <div style="margin-top:20px">${stagePill(t.stage)}</div>
     ${field("기술 개요 — 요약", t.summary)}
     ${field("기술 개요 — 상세", t.detail)}
     <div class="two-col">
@@ -474,37 +655,30 @@ function openDetail(i) {
       ${field("국외 시장 전망", t.overseas)}
     </div>
     ${field("사업화 중점 내용", t.focus)}
-    <div class="field">
-      <h3>이 단계는 무슨 뜻인가</h3>
-      <p>${esc(STAGES[t.stage].label)} — ${esc(STAGES[t.stage].hint)}.
-      ${t.stage === "early"
-        ? "바로 창업으로 잇기보다, 연구 기관과 함께 다듬어야 하는 단계입니다. 공개기술의 대부분(1,250건)이 여기에 속합니다."
-        : t.stage === "ready"
-        ? "실증을 마쳤거나 사업화에 가까운 소수의 기술입니다. 전체 1,451건 중 35건뿐입니다."
-        : t.stage === "collab"
-        ? "시작품 수준까지 검증된 기술로, 공동연구로 이어가기 좋은 단계입니다."
-        : "원본 데이터에 기술성숙도 값이 없어 단계를 판단할 수 없습니다."}</p>
-    </div>
+    ${ladder(t)}
     ${partnerPanel()}
     ${contextPanel()}
-    <p style="margin-top:22px;font-size:12.5px;color:var(--faint)">
-      출처: 연구개발특구진흥재단 「사업화 공개 기술 세부 현황」 (공공데이터포털).
-      기술 개요와 시장 전망은 원본 문장을 그대로 인용했습니다.</p>`;
+    <p class="src-note">출처: 연구개발특구진흥재단 「사업화 공개 기술 세부 현황」 (공공데이터포털).
+      기술 개요와 시장 전망은 원본 문장을 그대로 인용했으며, 요약하거나 다시 쓰지 않았습니다.</p>`;
 
   $("#dBody").scrollTop = 0;
   $("#detail").showModal();
 }
 
-/* ---------- 이벤트 ---------- */
+/* ── 이벤트 ─────────────────────────────────────────── */
+let timer;
 $("#q").addEventListener("input", (e) => {
   $("#clear").hidden = !e.target.value;
-  clearTimeout(window._t);
-  window._t = setTimeout(() => run(), 130);
+  clearTimeout(timer);
+  timer = setTimeout(run, 130);
 });
 $("#clear").addEventListener("click", () => {
-  $("#q").value = ""; $("#clear").hidden = true; $("#q").focus(); run();
+  $("#q").value = "";
+  $("#clear").hidden = true;
+  $("#q").focus();
+  run();
 });
-document.querySelector(".chips").addEventListener("click", (e) => {
+$("#chips").addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
   if (!chip) return;
   $("#q").value = chip.textContent.trim();
@@ -517,28 +691,35 @@ $("#filters").addEventListener("click", (e) => {
   stageFilter = btn.dataset.stage || null;
   run();
 });
-$("#cards").addEventListener("click", (e) => {
-  const card = e.target.closest(".card");
-  if (card) openDetail(Number(card.dataset.i));
+$("#rows").addEventListener("click", (e) => {
+  const row = e.target.closest(".row");
+  if (row) openDetail(Number(row.dataset.i));
 });
-$("#more").addEventListener("click", () => renderCards(false));
+$("#more").addEventListener("click", () => renderRows(false));
 $("#dClose").addEventListener("click", () => $("#detail").close());
 $("#detail").addEventListener("click", (e) => { if (e.target.id === "detail") $("#detail").close(); });
 
-/* ---------- 시작 ---------- */
-fetch("data/data.json")
-  .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then((db) => {
-    DB = db;
-    buildIndex(DB.tech);
-    $("#loading").hidden = true;
-    $("#app").hidden = false;
-    run();
-  })
-  .catch((err) => {
-    $("#loading").innerHTML = "데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.";
-    console.error(err);
-  });
+/* ── 시작 ───────────────────────────────────────────── */
+function start(db) {
+  DB = db;
+  buildIndex(DB.tech);
+  $("#loading").hidden = true;
+  $("#app").hidden = false;
+  run();
+}
+
+const inline = JSON.parse(document.getElementById("inline-data").textContent);
+if (inline) {
+  start(inline);
+} else {
+  fetch("data/data.json")
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(start)
+    .catch((err) => {
+      $("#loading").textContent = "데이터를 불러오지 못했습니다. 새로고침해 주세요.";
+      console.error(err);
+    });
+}
 </script>
 </body>
 </html>
